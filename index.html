@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Check Input Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+        <h1 class="text-2xl font-bold mb-4 text-center">Background Check Input Form</h1>
+        <div class="mb-4">
+            <label for="checkType" class="block text-sm font-medium text-gray-700">Select Check Type:</label>
+            <select id="checkType" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="" disabled selected>Select a check type</option>
+                <option value="Credit Check">Credit Check</option>
+                <option value="Criminal Record Check">Criminal Record Check</option>
+                <option value="Civil Litigation Check">Civil Litigation Check</option>
+                <option value="Employment Reference Check">Employment Reference Check</option>
+                <option value="Education Reference Check">Education Reference Check</option>
+                <option value="Licenses Check">Licenses Check</option>
+                <option value="Company Records Check">Company Records Check</option>
+                <option value="Driving License Check">Driving License Check</option>
+                <option value="Address Check">Address Check</option>
+                <option value="Motor Vehicle Check">Motor Vehicle Check</option>
+                <option value="Legal Right to Work Check">Legal Right to Work Check</option>
+                <option value="Passport Verification Check">Passport Verification Check</option>
+                <option value="Directorships">Directorships</option>
+                <option value="Highest Educational Qualification">Highest Educational Qualification</option>
+                <option value="Professional/Technical Memberships and Qualifications">Professional/Technical Memberships and Qualifications</option>
+                <option value="Full Social Media Screening">Full Social Media Screening</option>
+                <option value="Adverse Media Search">Adverse Media Search</option>
+                <option value="Employment History - CV Review">Employment History - CV Review</option>
+                <option value="AML (Sanctions, International, Global Watchlist & Regulatory Enforcement Bodies)">AML (Sanctions, International, Global Watchlist & Regulatory Enforcement Bodies)</option>
+                <option value="ID Check">ID Check</option>
+                <option value="Credit Bureau Inquiry with Identity Cross-Check">Credit Bureau Inquiry with Identity Cross-Check</option>
+                <option value="Professional Designation Check">Professional Designation Check</option>
+                <option value="Employment History Check">Employment History Check</option>
+                <option value="Name Based Criminal Check">Name Based Criminal Check</option>
+                <option value="Enhanced Criminal Record Check">Enhanced Criminal Record Check</option>
+                <option value="Court Record Check">Court Record Check</option>
+                <option value="Driving Licenses Check">Driving Licenses Check</option>
+                <option value="Professional Courses">Professional Courses</option>
+                <option value="Basic Employment Check">Basic Employment Check</option>
+                <option value="Employment Performance Check">Employment Performance Check</option>
+                <option value="Character Reference Check">Character Reference Check</option>
+                <option value="Executive Employment Check">Executive Employment Check</option>
+                <option value="Professional References">Professional References</option>
+                <option value="National Criminal">National Criminal</option>
+                <option value="Global Watchlist Check">Global Watchlist Check</option>
+                <option value="Courts Records Check">Courts Records Check</option>
+                <option value="Identity Card Verification">Identity Card Verification</option>
+                <option value="Current Address Verification">Current Address Verification</option>
+                <option value="Social Media Search">Social Media Search</option>
+                <option value="Professional License Check">Professional License Check</option>
+                <option value="KRA Pin">KRA Pin</option>
+                <option value="Academic Certificate Verification (per certificate)">Academic Certificate Verification (per certificate)</option>
+                <option value="NYSC Certificate Verification">NYSC Certificate Verification</option>
+                <option value="Identity Verification/National ID">Identity Verification/National ID</option>
+                <option value="Company Records Checks">Company Records Checks</option>
+                <option value="Passport Check">Passport Check</option>
+                <option value="Tax Records Check">Tax Records Check</option>
+                <option value="Address Confirmation">Address Confirmation</option>
+                <option value="Employment Check">Employment Check</option>
+                <option value="License Check">License Check</option>
+                <option value="Tax Records">Tax Records</option>
+                <option value="Company Record Check">Company Record Check</option>
+                <option value="Company Record (Investigative) Check">Company Record (Investigative) Check</option>
+                <option value="Death Certificate Check">Death Certificate Check</option>
+                <option value="Motor Vehicle Record Check">Motor Vehicle Record Check</option>
+                <option value="Social Media Check">Social Media Check</option>
+                <option value="Civil Court Search Check">Civil Court Search Check</option>
+                <option value="Company Record Investigation Check">Company Record Investigation Check</option>
+                <option value="Criminal Check">Criminal Check</option>
+                <option value="Company Reference Check">Company Reference Check</option>
+            </select>
+        </div>
+        <div id="formContainer" class="hidden">
+            <h2 class="text-xl font-semibold mb-4">Required Inputs</h2>
+            <div id="inputFields" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <script>
+        const checkTypes = {
+            "Credit Check": ["Full name", "Social Security Number or National ID", "Date of birth", "Current address", "Written consent"],
+            "Criminal Record Check": ["Full name", "Date of birth", "Social Security Number or National ID", "Address history (past 7-10 years)", "Written consent"],
+            "Civil Litigation Check": ["Full name", "Date of birth", "Social Security Number or National ID", "Address history (past 10 years)"],
+            "Employment Reference Check": ["Full name", "Employment history (company names, dates, job titles)", "Contact details of previous employers", "Resume/CV", "Written consent"],
+            "Education Reference Check": ["Full name", "Educational institution names", "Dates of attendance", "Degrees/certificates earned", "Written consent"],
+            "Licenses Check": ["Full name", "License type and number", "Issuing authority", "Date of issuance/expiration", "Written consent"],
+            "Company Records Check": ["Full name", "Company name(s)", "Registration details", "Role in the company", "Written consent"],
+            "Driving License Check": ["Full name", "Driver’s license number", "Issuing state/country", "Date of birth", "Written consent"],
+            "Address Check": ["Full name", "Current and past addresses", "Social Security Number or National ID", "Date of birth"],
+            "Motor Vehicle Check": ["Full name", "Driver’s license number", "Issuing state/country", "Date of birth", "Written consent"],
+            "Legal Right to Work Check": ["Full name", "Social Security Number or National ID", "Passport or work visa details", "Date of birth", "Written consent"],
+            "Passport Verification Check": ["Full name", "Passport number", "Issuing country", "Date of birth", "Written consent"],
+            "Directorships": ["Full name", "Company name(s)", "Registration details", "Written consent"],
+            "Highest Educational Qualification": ["Full name", "Educational institution names", "Dates of attendance", "Degrees/certificates earned", "Written consent"],
+            "Professional/Technical Memberships and Qualifications": ["Full name", "Membership/qualification details", "Dates of membership", "Written consent"],
+            "Full Social Media Screening": ["Full name", "Social media handles", "Written consent"],
+            "Adverse Media Search": ["Full name", "Date of birth", "Aliases", "Written consent"],
+            "Employment History - CV Review": ["Full name", "Employment history (company names, dates, job titles)", "Resume/CV", "Written consent"],
+            "AML (Sanctions, International, Global Watchlist & Regulatory Enforcement Bodies)": ["Full name", "Date of birth", "Social Security Number or National ID", "Aliases", "Written consent"],
+            "ID Check": ["Full name", "National ID number", "Date of birth", "Written consent"],
+            "Credit Bureau Inquiry with Identity Cross-Check": ["Full name", "Social Security Number or National ID", "Date of birth", "Current address", "Written consent"],
+            "Professional Designation Check": ["Full name", "License type and number", "Issuing authority", "Date of issuance/expiration", "Written consent"],
+            "Employment History Check": ["Full name", "Employment history (company names, dates, job titles)", "Contact details of previous employers", "Resume/CV", "Written consent"],
+            "Name Based Criminal Check": ["Full name", "Date of birth", "Social Security Number or National ID", "Address history (past 7-10 years)", "Written consent"],
+            "Enhanced Criminal Record Check": ["Full name", "Date of birth", "Social Security Number or National ID", "Address history (past 7-10 years)", "Written consent"],
+            "Court Record Check": ["Full name", "Date of birth", "Social Security Number or National ID", "Address history (past 10 years)"],
+            "Driving Licenses Check": ["Full name", "Driver’s license number", "Issuing state/country", "Date of birth", "Written consent"],
+            "Professional Courses": ["Full name", "Membership/qualification details", "Dates of membership", "Written consent"],
+            "Basic Employment Check": ["Full name", "Employment history (company names, dates, job titles)", "Contact details of previous employers", "Written consent"],
+            "Employment Performance Check": ["Full name", "Employment history (company names, dates, job titles)", "Contact details of previous employers", "Written consent"],
+            "Character Reference Check": ["Full name", "Contact details of character references", "Written consent"],
+            "Executive Employment Check": ["Full name", "Employment history (company names, dates, job titles)", "Contact details of previous employers", "Written consent"],
+            "Professional References": ["Full name", "Contact details of professional references", "Written consent"],
+            "National Criminal": ["Full name", "Date of birth", "Social Security Number or National ID", "Address history (past 7-10 years)", "Written consent"],
+            "Global Watchlist Check": ["Full name", "Date of birth", "Social Security Number or National ID", "Aliases", "Written consent"],
+            "Courts Records Check": ["Full name", "Date of birth", "Social Security Number or National ID", "Address history (past 10 years)"],
+            "Identity Card Verification": ["Full name", "National ID number", "Date of birth", "Written consent"],
+            "Current Address Verification": ["Full name", "Current and past addresses", "Social Security Number or National ID", "Date of birth"],
+            "Social Media Search": ["Full name", "Social media handles", "Written consent"],
+            "Professional License Check": ["Full name", "License type and number", "Issuing authority", "Date of issuance/expiration", "Written consent"],
+            "KRA Pin": ["Full name", "KRA PIN number", "Date of birth", "Written consent"],
+            "Academic Certificate Verification (per certificate)": ["Full name", "Educational institution names", "Dates of attendance", "Degrees/certificates earned", "Written consent"],
+            "NYSC Certificate Verification": ["Full name", "NYSC certificate number", "Date of birth", "Written consent"],
+            "Identity Verification/National ID": ["Full name", "National ID number", "Date of birth", "Written consent"],
+            "Company Records Checks": ["Full name", "Company name(s)", "Registration details", "Role in the company", "Written consent"],
+            "Passport Check": ["Full name", "Passport number", "Issuing country", "Date of birth", "Written consent"],
+            "Tax Records Check": ["Full name", "Social Security Number or National ID", "Tax identification number", "Written consent"],
+            "Address Confirmation": ["Full name", "Current and past addresses", "Social Security Number or National ID", "Date of birth"],
+            "Employment Check": ["Full name", "Employment history (company names, dates, job titles)", "Contact details of previous employers", "Written consent"],
+            "License Check": ["Full name", "License type and number", "Issuing authority", "Date of issuance/expiration", "Written consent"],
+            "Tax Records": ["Full name", "Social Security Number or National ID", "Tax identification number", "Written consent"],
+            "Company Record Check": ["Full name", "Company name(s)", "Registration details", "Role in the company", "Written consent"],
+            "Company Record (Investigative) Check": ["Full name", "Company name(s)", "Registration details", "Role in the company", "Written consent"],
+            "Death Certificate Check": ["Full name", "Date of birth", "Date of death (if known)", "Written consent"],
+            "Motor Vehicle Record Check": ["Full name", "Driver’s license number", "Issuing state/country", "Date of birth", "Written consent"],
+            "Social Media Check": ["Full name", "Social media handles", "Written consent"],
+            "Civil Court Search Check": ["Full name", "Date of birth", "Social Security Number or National ID", "Address history (past 10 years)"],
+            "Company Record Investigation Check": ["Full name", "Company name(s)", "Registration details", "Role in the company", "Written consent"],
+            "Criminal Check": ["Full name", "Date of birth", "Social Security Number or National ID", "Address history (past 7-10 years)", "Written consent"],
+            "Company Reference Check": ["Full name", "Company name(s)", "Registration details", "Role in the company", "Written consent"]
+        };
+
+        const checkTypeSelect = document.getElementById('checkType');
+        const formContainer = document.getElementById('formContainer');
+        const inputFields = document.getElementById('inputFields');
+
+        checkTypeSelect.addEventListener('change', () => {
+            const selectedCheck = checkTypeSelect.value;
+            inputFields.innerHTML = '';
+
+            if (selectedCheck && checkTypes[selectedCheck]) {
+                formContainer.classList.remove('hidden');
+                checkTypes[selectedCheck].forEach(field => {
+                    const fieldDiv = document.createElement('div');
+                    fieldDiv.innerHTML = `
+                        <label class="block text-sm font-medium text-gray-700">${field}</label>
+                        <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter ${field}" required>
+                    `;
+                    inputFields.appendChild(fieldDiv);
+                });
+            } else {
+                formContainer.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
